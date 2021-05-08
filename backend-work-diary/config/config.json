@@ -11,13 +11,13 @@
     "password": "manro456,.-",
     "database": "workdiary",
     "host": "localhost",
-    "dialect": "postgress"
+    "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
     "password": "manro456,.-",
     "database": "workdiary",
     "host": "localhost",
-    "dialect": "postgress"
+    "dialect": "postgres"
   }
 }

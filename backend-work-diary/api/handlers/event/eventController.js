@@ -36,7 +36,12 @@ export const UpdateEvent= async(req,res)=>{
             emailClient,
             time,
             status
-        });
+        },{
+            where:{
+                id
+            }
+        },
+        );
         res.json({
             message:'Event update'
         })
@@ -49,17 +54,12 @@ export const UpdateEvent= async(req,res)=>{
 }
 
 export const deleteEvent= async(req,res)=>{
-    const {ttitle,description,typeWork,ubication,nameClient,emailClient,time,status} = req.body;
+    const {id} = req.body;
     try{
-        const event = await Event.delete({
-            tittle,
-            description,
-            typeWork,
-            ubication,
-            nameClient,
-            emailClient,
-            time,
-            status
+        const event = await Event.destroy({
+            where:{
+                id 
+            }
         });
         res.json({
             message:'Event deleted'
@@ -72,21 +72,16 @@ export const deleteEvent= async(req,res)=>{
     }
 }
 
-export const getEvent= async(req,res)=>{
-    const {tittle,description,typeWork,ubication,nameClient,emailClient,time,status} = req.body;
+export const getEventById= async(req,res)=>{
+    const id = req.params.id;
     try{
         const event = await Event.get({
-            tittle,
-            description,
-            typeWork,
-            ubication,
-            nameClient,
-            emailClient,
-            time,
-            status
+            where:{
+                id 
+            }
         });
         res.json({
-            message:'Event get'
+            event 
         })
     }catch(error){
         console.log(error);
@@ -95,3 +90,4 @@ export const getEvent= async(req,res)=>{
         })
     }
 }
+
