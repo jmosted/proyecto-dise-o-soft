@@ -1,37 +1,39 @@
-import {Sequelize} from 'sequelize';
-import {sequelize as db} from '../../../config/db/db.js';
+import { Sequelize } from "sequelize";
+import { sequelize as db } from "../../../config/db/db.js";
 
-export const User = db.define('user',{
-    id:{
-        type:Sequelize.INTEGER,
-        primaryKey:true
+export const User = db.define(
+  "users",
+  {
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
     },
-    name:{
-        type:Sequelize.STRING
+    name: {
+      type: Sequelize.STRING,
     },
-    lastName:{
-        type:Sequelize.STRING
+    lastName: {
+      type: Sequelize.STRING,
     },
-    dni:{
-        type:Sequelize.BIGINT,
-        unique:true
+    dni: {
+      type: Sequelize.BIGINT,
+      unique: true,
     },
-    email:{
-        type:Sequelize.STRING,
-        unique:true
+    email: {
+      type: Sequelize.STRING,
+      unique: true,
     },
-    password:{
-        type:Sequelize.STRING
+    password: {
+      type: Sequelize.STRING,
     },
-    cellphone:{
-        type:Sequelize.BIGINT,
-        unique:true
+    cellphone: {
+      type: Sequelize.BIGINT,
+      unique: true,
     },
-    direction:{
-        type:Sequelize.STRING
-    }
-
-
-})
-
-
+    direction: {
+      type: Sequelize.STRING,
+    },
+  },
+  {
+    schema: "public",
+  }
+);
