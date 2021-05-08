@@ -14,6 +14,7 @@ const Register = () => {
   const onChange = (e) => {
     setRegister({ ...register, [e.target.name]: e.target.value });
   };
+  
   const onSubmit = (e) => {
     e.preventDefault();
     if (register.password.length < 8){
@@ -22,8 +23,7 @@ const Register = () => {
       alert("Las contraseñas no coinciden");
     }else{
       console.log(register);
-    }
-    
+    }  
   };
   return (
     <div>
