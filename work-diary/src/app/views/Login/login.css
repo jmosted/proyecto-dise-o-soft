@@ -150,6 +150,10 @@ input:focus ~ .highlight {
 }
 .button:focus { outline: 0; }
 
+.button-register { 
+	width: 100%;
+	padding: 12px 24px;
+}
 
 /* Button modifiers */
 
@@ -157,6 +161,7 @@ input:focus ~ .highlight {
   background: #4a89dc;
   text-shadow: 1px 1px 0 rgba(39, 110, 204, .5);
 }
+
 
 .buttonBlue:hover { background: #357bd8; }
 

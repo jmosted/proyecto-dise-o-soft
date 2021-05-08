@@ -1,6 +1,6 @@
 import { User } from './work.model.js';
 
-export const createUser= async(req,res)=>{
+export const createWork= async(req,res)=>{
     const {nameWork,description,status} = req.body;
     try{
         const work = await Work.create({
@@ -19,35 +19,40 @@ export const createUser= async(req,res)=>{
     }
 }
 
-export const updateUser= async(req,res)=>{
+export const updateWork= async(req,res)=>{
     const {nameWork,description,status} = req.body;
     try{
         const work = await Work.update({
             nameWork,
             description,
             status
-        });
+        },{
+            where:{
+                nameWork 
+            }
+        }
+        );
         res.json({
-            message:'User update'
+            message:'Work update'
         })
     }catch(error){
         console.log(error);
         res.status(500).json({
-            message:'Error al actualizar el usuario'
+            message:'Error al actualizar el trabajo'
         })
     }
 }
 
-export const deleteUser= async(req,res)=>{
-    const {nameWork,description,status} = req.body;
+export const deleteWork= async(req,res)=>{
+    const {id} = req.body;
     try{
-        const work = await Work.delete({
-            nameWork,
-            description,
-            status
+        const work = await Work.destroy({
+            where:{
+                id
+            }
         });
         res.json({
-            message:'User deleted'
+            message:'Work deleted'
         })
     }catch(error){
         console.log(error);
@@ -57,21 +62,21 @@ export const deleteUser= async(req,res)=>{
     }
 }
 
-export const getUser= async(req,res)=>{
-    const {nameWork,description,status} = req.body;
+export const getWork= async(req,res)=>{
+    const id = req.params.nameWork;
     try{
-        const work = await Work.get({
-            nameWork,
-            description,
-            status
+        const work = await Work.findAll({
+            where:{
+                id 
+            }
         });
         res.json({
-            message:'User get'
+            work
         })
     }catch(error){
         console.log(error);
         res.status(500).json({
-            message:'Error al obtener el usuario'
+            message:'Error al obtener el trabajo'
         })
     }
 }

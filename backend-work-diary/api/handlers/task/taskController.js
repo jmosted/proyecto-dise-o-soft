@@ -28,6 +28,11 @@ export const UpdateTask= async(req,res)=>{
             description,
             status,
             time
+        },{
+            where:{
+                id
+            }
+            
         });
         res.json({
             message:'Task update'
@@ -41,13 +46,12 @@ export const UpdateTask= async(req,res)=>{
 }
 
 export const deleteTask= async(req,res)=>{
-    const {tittle,description,status,time} = req.body;
+    const {id} = req.body;
     try{
-        const task = await Task.delete({
-            tittle,
-            description,
-            status,
-            time
+        const task = await Task.destroy({
+            where:{
+                id
+            }
         });
         res.json({
             message:'Task deleted'
@@ -60,17 +64,16 @@ export const deleteTask= async(req,res)=>{
     }
 }
 
-export const getTask= async(req,res)=>{
-    const {tittle,description,status,time} = req.body;
+export const getTaskById= async(req,res)=>{
+    const id = req.params.id;
     try{
-        const task = await Task.get({
-            tittle,
-            description,
-            status,
-            time
+        const task = await Task.findAll({
+            where:{
+                id
+            }
         });
         res.json({
-            message:'Task get'
+            task
         })
     }catch(error){
         console.log(error);
