@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { userService } from "../../api/user/user.service";
 import "./register.css";
 const Register = () => {
   const [register, setRegister] = useState({
@@ -22,7 +23,18 @@ const Register = () => {
     }else if(register.password != register.passwordConf){
       alert("Las contraseñas no coinciden");
     }else{
+      delete register.passwordConf
       console.log(register);
+      userService.createUser().then(
+        (res) => {
+          console.log(res);
+        }
+      )
+      .catch(
+        (err) => {
+          console.log(err);
+        }
+      );
     }  
   };
   return (
