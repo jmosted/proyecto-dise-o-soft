@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "manro456,.-",
+    "database": "workdiary",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "manro456,.-",
+    "database": "workdiary",
+    "host": "localhost",
+    "dialect": "postgress"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "manro456,.-",
+    "database": "workdiary",
+    "host": "localhost",
+    "dialect": "postgress"
+  }
+}
