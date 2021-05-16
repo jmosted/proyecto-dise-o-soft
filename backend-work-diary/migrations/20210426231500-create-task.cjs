@@ -11,6 +11,9 @@ module.exports = {
       tittle: {
         type: Sequelize.STRING
       },
+      event_id: {
+        type: Sequelize.INTEGER
+      },
       description: {
         type: Sequelize.STRING
       },
