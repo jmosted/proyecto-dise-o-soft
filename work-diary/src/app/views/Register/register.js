@@ -15,38 +15,36 @@ const Register = () => {
   const onChange = (e) => {
     setRegister({ ...register, [e.target.name]: e.target.value });
   };
-  
+
   const onSubmit = (e) => {
     e.preventDefault();
-    if (register.password.length < 8){
+    if (register.password.length < 8) {
       alert("La contraseña no tiene el tamaño minimo");
-    }else if(register.password != register.passwordConf){
+    } else if (register.password != register.passwordConf) {
       alert("Las contraseñas no coinciden");
-    }else{
-      delete register.passwordConf
+    } else {
+      delete register.passwordConf;
       console.log(register);
-      userService.createUser().then(
-        (res) => {
+      userService
+        .createUser()
+        .then((res) => {
           console.log(res);
-        }
-      )
-      .catch(
-        (err) => {
+        })
+        .catch((err) => {
           console.log(err);
-        }
-      );
-    }  
+        });
+    }
   };
   return (
     <div>
-      <h1>Formulario de Registro</h1>
+      <h1>WELCOME</h1>
       <form
         method="post"
         className="form-register"
         onChange={onChange}
         onSubmit={onSubmit}
       >
-        <h2 className="form-titulo">Registrar Usuario</h2>
+        <h2 className="form-titulo">Registro de Usuario</h2>
         <div className="contenedor-inputs">
           <input
             type="text"
@@ -92,6 +90,14 @@ const Register = () => {
           />
           <input
             type="text"
+            name="work"
+            placeholder="Trabajo/s"
+            className="input-100"
+            required
+            input
+          />
+          <input
+            type="text"
             name="direction"
             placeholder="Dirección"
             className="input-100"
@@ -101,9 +107,7 @@ const Register = () => {
           <input type="submit" value="Registrar" className="btn-enviar" />
           <p className="form-link">
             Ya tienes una cuenta?
-            <Link to="/login">
-              Ingresa aquí
-            </Link>
+            <Link to="/login">Ingresa aquí</Link>
           </p>
         </div>
       </form>
