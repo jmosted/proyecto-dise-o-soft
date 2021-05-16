@@ -1,8 +1,9 @@
 import express from "express";
 import morgan from "morgan";
-import path from "path";
 import loginRoutes from "./handlers/login/routes.js";
 import userRoutes from './handlers/user/routes.js';
+import eventRouter from "./handlers/event/routes.js";
+import taskRouter from "./handlers/task/taskRouter.js";
 
 export const server = () => {
   const app = express(); //crear una objeto de la variable express
@@ -25,7 +26,11 @@ export const server = () => {
 
   app.use(loginRoutes); //usar la ruta
 
-  app.use(userRoutes);
+  app.use(userRoutes); // ruta user
+
+  app.use(eventRouter); // event router
+
+  app.use(taskRouter); // task router
 
   return app;
 };

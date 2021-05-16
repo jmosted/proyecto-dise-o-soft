@@ -28,8 +28,8 @@ export const createUser = async (req, res) => {
                 ],
             }
         );
-        user.save();
-        res.json({
+        await user.save();
+        res.status(200).json({
             error: false,
             message: "Usuario creado exitosamente",
             data: null,
@@ -63,14 +63,13 @@ export const updateUser = async (req, res) => {
                 },
             }
         );
-        res.json({
+        res.status(200).json({
             error: false,
             message: "User update",
             data: {user},
             code: 200,
         });
     } catch (error) {
-        console.log(error);
         res.status(202).json({
             error: true,
             message: "Error al actualizar el usuario",
@@ -82,23 +81,33 @@ export const updateUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
     const {dni} = req.body;
-    console.log(req.body);
     try {
-        await User.destroy({
+        const user = await User.destroy({
             where: {
                 dni
             },
         });
-        res.json({
-            error: false,
-            message: "Usuario borrado correctamente",
-            data: null,
-            code: 200,
-        });
+        if (user === 0) {
+            res.status(202).json({
+                error: true,
+                message: "El dni no coincide con ninguna cuenta registrada.",
+                data: null,
+                code: 202,
+            });
+        } else {
+            res.status(200).json({
+                error: false,
+                message: "Usuario borrado correctamente",
+                data: null,
+                code: 200,
+            });
+        }
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
+        res.status(202).json({
+            error: true,
             message: "Error al eliminar el usuario",
+            data: null,
+            code: 202,
         });
     }
 };
@@ -111,7 +120,7 @@ export const getUserByDni = async (req, res) => {
                 dni,
             },
         });
-        res.json({
+        res.status(200).json({
             error: false,
             message: "procesado correctamente",
             data: {user},

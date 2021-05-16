@@ -1,22 +1,25 @@
 import {Sequelize} from 'sequelize';
 import {sequelize} from '../../config/db/db.js';
 
-export const Task = sequelize.define('task',{
-    id:{
-        type:Sequelize.INTEGER,
-        primaryKey:true
+export const Task = sequelize.define('task', {
+    id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true
     },
-    tittle:{
-        type:Sequelize.STRING
+    tittle: {
+        type: Sequelize.STRING
     },
-    description:{
-        type:Sequelize.STRING
+    event_id: {
+        type: Sequelize.INTEGER
     },
-    status:{
-        type:Sequelize.BOOLEAN
+    description: {
+        type: Sequelize.STRING
     },
-    time:{
-        type:Sequelize.DATE
+    status: {
+        type: Sequelize.BOOLEAN
+    },
+    time: {
+        type: Sequelize.DATE
     }
 
 })

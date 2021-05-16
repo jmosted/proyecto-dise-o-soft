@@ -1,8 +1,8 @@
-import { Event } from './event.model.js';
+import {Event} from './event.model.js';
 
-export const createEvent= async(req,res)=>{
-    const {tittle,description,typeWork,ubication,nameClient,emailClient,time,status} = req.body;
-    try{
+export const createEvent = async (req, res) => {
+    const {tittle, description, typeWork, ubication, nameClient, emailClient, time, status} = req.body;
+    try {
         const event = await Event.create({
             tittle,
             description,
@@ -11,82 +11,133 @@ export const createEvent= async(req,res)=>{
             nameClient,
             emailClient,
             time,
-            status  
+            status
+        }, {
+            fields: [
+                "tittle",
+                "description",
+                "typeWork",
+                "ubication",
+                "nameClient",
+                "emailClient",
+                "time",
+                "status"
+            ]
         });
-        res.json({
-            message:'Event create'
-        })
-    }catch(error){
-        console.log(error);
-        res.status(500).json({
-            message:'Error al crear el Evento'
+        await event.save();
+        res.status(200).json({
+            error: false,
+            message: "Evento creado exitosamente",
+            data: null,
+            code: 200
+        });
+    } catch (error) {
+        res.status(202).json({
+            error: true,
+            message: "Error al crear el evento",
+            data: null,
+            code: 202
         })
     }
 }
 
-export const UpdateEvent= async(req,res)=>{
-    const {tittle,description,typeWork,ubication,nameClient,emailClient,time,status} = req.body;
-    try{
+export const updateEvent = async (req, res) => {
+    const {id, tittle, description, typeWork, ubication, nameClient, emailClient, time, status} = req.body;
+    try {
         const event = await Event.update({
-            tittle,
-            description,
-            typeWork,
-            ubication,
-            nameClient,
-            emailClient,
-            time,
-            status
-        },{
-            where:{
+                tittle,
+                description,
+                typeWork,
+                ubication,
+                nameClient,
+                emailClient,
+                time,
+                status
+            }, {
+                fields: [
+                    "tittle",
+                    "description",
+                    "typeWork",
+                    "ubication",
+                    "nameClient",
+                    "emailClient",
+                    "time",
+                    "status"
+                ],
+                where: {
+                    id
+                }
+            },
+        );
+        res.status(200).json({
+            error: false,
+            message: "Event update",
+            data: {event},
+            code: 200,
+        })
+    } catch (error) {
+        res.status(202).json({
+            error: true,
+            message: "Error al actualizar el evento",
+            data: null,
+            code: 202,
+        })
+    }
+}
+
+export const deleteEvent = async (req, res) => {
+    const {id} = req.body;
+    try {
+        const event = await Event.destroy({
+            where: {
                 id
             }
-        },
-        );
-        res.json({
-            message:'Event update'
-        })
-    }catch(error){
-        console.log(error);
-        res.status(500).json({
-            message:'Error al actualizar el evento'
-        })
-    }
-}
-
-export const deleteEvent= async(req,res)=>{
-    const {id} = req.body;
-    try{
-        const event = await Event.destroy({
-            where:{
-                id 
-            }
         });
-        res.json({
-            message:'Event deleted'
-        })
-    }catch(error){
-        console.log(error);
-        res.status(500).json({
-            message:'Error al eliminar el evento'
+        if (event === 0) {
+            res.status(202).json({
+                error: true,
+                message: "El ID no coincide con ninguna Evento registrado.",
+                data: null,
+                code: 202,
+            });
+        } else {
+            res.status(200).json({
+                error: false,
+                message: "Evento borrado correctamente",
+                data: null,
+                code: 200,
+            });
+        }
+    } catch (error) {
+        res.status(202).json({
+            error: true,
+            message: "Error al eliminar el Evento",
+            data: null,
+            code: 202,
         })
     }
 }
 
-export const getEventById= async(req,res)=>{
+export const getEventById = async (req, res) => {
     const id = req.params.id;
-    try{
+    try {
         const event = await Event.get({
-            where:{
-                id 
+            where: {
+                id
             }
         });
-        res.json({
-            event 
-        })
-    }catch(error){
-        console.log(error);
-        res.status(500).json({
-            message:'Error al obtener el evento'
+        res.status(200).json({
+            error: false,
+            message: "procesado correctamente",
+            data: {event},
+            code: 200,
+        });
+    } catch (error) {
+        res.status(202).json({
+            error: true,
+            message: "Error al obtener el evento",
+            data: null,
+            code: 202,
         })
     }
 }
