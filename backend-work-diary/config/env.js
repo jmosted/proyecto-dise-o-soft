@@ -1,5 +1,7 @@
 export const envConfig = {
     db: "workdiary",
     password: "root",
-    user: "postgres"
+    user: "postgres",
+    tokenSecret: "jose-roman",
+    tokenLife: 900
 }
