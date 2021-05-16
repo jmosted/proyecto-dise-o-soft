@@ -5,7 +5,7 @@ import userRoutes from './handlers/user/routes.js';
 import eventRouter from "./handlers/event/routes.js";
 import taskRouter from "./handlers/task/taskRouter.js";
 
-export const server = () => {
+export const Server = () => {
   const app = express(); //crear una objeto de la variable express
 
   app.set("port", process.env.PORT || 4000); //define el puerto por la variable env.PORT o montarlo por el puerto 4000

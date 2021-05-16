@@ -1,8 +1,7 @@
-import {server} from "./api/server.js"
+import {Server} from './api/server.js';
 
 
-
-const app = server();
+const app = Server();
 
 app.listen(app.get("port"),()=>{
     
