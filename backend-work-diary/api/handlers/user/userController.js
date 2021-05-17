@@ -2,8 +2,7 @@ import {User} from "./user.model.js";
 import {pwd} from "../../../config/internal/pwd/pwd.js";
 
 export const createUser = async (req, res) => {
-    const {name, lastName, dni, email, password, cellphone, direction} =
-        req.body;
+    const {name, lastName, dni, email, password, cellphone, direction} = req.body;
     try {
         const passHash = await pwd.encryption(password);
         const user = await User.create(
@@ -36,6 +35,7 @@ export const createUser = async (req, res) => {
             code: 200,
         });
     } catch (error) {
+        console.log(error);
         res.status(202).json({
             error: true,
             message: "Error al crear el usuario",

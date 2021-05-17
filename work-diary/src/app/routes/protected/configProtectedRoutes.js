@@ -5,7 +5,7 @@ import CreateEvent from "../../views/Create-Event/create-event";
 import CreateTask from "../../views/Create-Task/create-task";
 export default [
   {
-    path: "/event",
+    path: "/",
     exact: true,
     page: Event,
   },

@@ -1,16 +1,34 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./login.css";
+import {userService} from "../../api/user/user.service";
+import jwt_decode from "jwt-decode";
+import {useUserContext} from '../../hooks/useAuth'
 
 const Loginpage = () => {
   const [login, setLogin] = useState({ email: "", password: "" });
   const onChange = (e) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
   };
+  const {setUser} = useUserContext();
   const onSubmit = (e) => {
     e.preventDefault();
     if (login.password.length >= 8) {
-      console.log(login);
+      userService.Login(login).then(
+        (response)=>{
+         if(response.error){
+           console.log(response.message);
+         }else{
+           sessionStorage.setItem("token",response.data.token);
+           const user = jwt_decode(response.data.token);
+           setUser(user);
+         }
+        }
+      ).catch(
+        (err)=>{
+          console.log(err);
+        }
+      );
     } else {
       alert("La constraseña no tiene el tamaño minimo");
     }

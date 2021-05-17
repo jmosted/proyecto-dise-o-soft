@@ -6,6 +6,7 @@ const Register = () => {
   const [register, setRegister] = useState({
     name: "",
     lastName: "",
+    dni:"",
     email: "",
     password: "",
     passwordConf: "",
@@ -24,9 +25,8 @@ const Register = () => {
       alert("Las contraseñas no coinciden");
     } else {
       delete register.passwordConf;
-      console.log(register);
       userService
-        .createUser()
+        .createUser(register)
         .then((res) => {
           console.log(res);
         })
@@ -51,58 +51,61 @@ const Register = () => {
             name="name"
             placeholder="Nombre"
             className="input-48"
-            required
+            
           />
           <input
             type="text"
             name="lastName"
             placeholder="Apellidos"
             className="input-48"
-            required
+            
+          />
+          <input
+            type="number"
+            name="dni"
+            placeholder="DNI"
+            className="input-48"
+            
           />
           <input
             type="email"
             name="email"
             placeholder="Email"
             className="input-100"
-            required
+            
           />
           <input
             type="password"
             name="password"
             placeholder="Contraseña"
             className="input-48"
-            required
+            
           />
           <input
             type="password"
             name="passwordConf"
             placeholder="Confirmar contraseña"
             className="input-48"
-            required
+            
           />
           <input
             type="text"
             name="cellphone"
             placeholder="Teléfono"
             className="input-100"
-            required
+            
           />
           <input
             type="text"
             name="work"
             placeholder="Trabajo/s"
             className="input-100"
-            required
-            input
           />
           <input
             type="text"
             name="direction"
             placeholder="Dirección"
             className="input-100"
-            required
-            input
           />
           <input type="submit" value="Registrar" className="btn-enviar" />
           <p className="form-link">

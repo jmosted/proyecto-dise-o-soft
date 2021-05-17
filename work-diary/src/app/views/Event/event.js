@@ -1,8 +1,14 @@
 import React, { useState } from "react";
+import {useUserContext} from "../../hooks/useAuth"
 //import { Link } from "react-router-dom";
 //import "./login.css"
 
 const Event = () => {
+  const {setUser} = useUserContext();
+  const logout = () =>{
+    sessionStorage.clear();
+    setUser(null);
+  };
   return (
     <div className="container-fluid">
       <div className="row flex-nowrap">
@@ -17,16 +23,16 @@ const Event = () => {
             >
               <li className="nav-item">
                 <a className="nav-link align-middle px-0">
-                  <i class="far fa-user"></i>
+                  <i className="far fa-user"></i>
                   <span className="ms-1 d-none d-sm-inline">Perfil</span>
-                </a>
+                </a> 
               </li>
               <li>
                 <a
                   data-bs-toggle="collapse"
                   className="nav-link px-0 align-middle"
                 >
-                  <i class="fas fa-calendar-week"></i>
+                  <i className="fas fa-calendar-week"></i>
                   <span className="ms-1 d-none d-sm-inline">Eventos</span>{" "}
                 </a>
               </li>
@@ -35,13 +41,13 @@ const Event = () => {
                   className="nav-link px-0 align-middle"
                   data-bs-toggle="collapse"
                 >
-                  <i class="fas fa-tasks"></i>
+                  <i className="fas fa-tasks"></i>
                   <span className="ms-1 d-none d-sm-inline">Tareas</span>{" "}
                 </a>
               </li>
               <li>
-                <a className="nav-link px-0 align-middle">
-                  <i class="fas fa-power-off"></i>
+                <a className="nav-link px-0 align-middle custom-items" onClick={logout} style={{cursor: "pointer"}}>
+                  <i className="fas fa-power-off"></i>
                   <span className="ms-1 d-none d-sm-inline">Cerrar Sesión</span>
                 </a>
               </li>
@@ -50,19 +56,19 @@ const Event = () => {
         </div>
         <div className="col py-3" style={{overflowY:"hidden"}}>
           <div style={{display:"flex", flexWrap:"wrap"}}>
-            <div class="card" style={{margin: "20px", maxWidth:"350PX"}}>
+            <div className="card" style={{margin: "20px", maxWidth:"350PX"}}>
               <img
                 src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-                class="card-img-top"
+                className="card-img-top"
                 alt="..."
               />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
+              <div className="card-body">
+                <h5 className="card-title">Card title</h5>
+                <p className="card-text">
                   Some quick example text to build on the card title and make up
                   the bulk of the card's content.
                 </p>
-                <a class="btn btn-primary">
+                <a className="btn btn-primary">
                   Ver mas
                 </a>
               </div>

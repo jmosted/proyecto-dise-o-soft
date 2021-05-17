@@ -1,5 +1,5 @@
 import {Sequelize} from 'sequelize';
-import {sequelize} from '../../config/db/db.js';
+import {sequelize} from '../../../config/db/db.js';
 
 export const Task = sequelize.define('task', {
     id: {
