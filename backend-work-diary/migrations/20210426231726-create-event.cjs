@@ -15,10 +15,22 @@ module.exports = {
         type: Sequelize.STRING
       },
       status: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.STRING
+      },
+      typeWork:{
+        type:Sequelize.STRING
+      },
+      ubication:{
+        type:Sequelize.STRING
       },
       time: {
         type: Sequelize.DATE
+      },
+      nameClient:{
+        type:Sequelize.STRING
+      },
+      emailClient:{
+        type:Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

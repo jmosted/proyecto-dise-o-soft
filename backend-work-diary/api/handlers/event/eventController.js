@@ -2,6 +2,7 @@ import {Event} from './event.model.js';
 
 export const createEvent = async (req, res) => {
     const {tittle, description, typeWork, ubication, nameClient, emailClient, time, status} = req.body;
+    console.log(req.body)
     try {
         const event = await Event.create({
             tittle,
@@ -32,6 +33,7 @@ export const createEvent = async (req, res) => {
             code: 200
         });
     } catch (error) {
+        console.log(error);
         res.status(202).json({
             error: true,
             message: "Error al crear el evento",
@@ -126,6 +128,26 @@ export const getEventById = async (req, res) => {
                 id
             }
         });
+        res.status(200).json({
+            error: false,
+            message: "procesado correctamente",
+            data: {event},
+            code: 200,
+        });
+    } catch (error) {
+        res.status(202).json({
+            error: true,
+            message: "Error al obtener el evento",
+            data: null,
+            code: 202,
+        })
+    }
+}
+
+export const getAllEvents = async (req, res) => {
+    
+    try {
+        const event = await Event.findAll();
         res.status(200).json({
             error: false,
             message: "procesado correctamente",

@@ -1,81 +1,43 @@
-import React, { useState } from "react";
-import {useUserContext} from "../../hooks/useAuth"
-//import { Link } from "react-router-dom";
-//import "./login.css"
+import React, { useState, useEffect } from "react";
+import { userService } from "../../api/user/user.service";
 
 const Event = () => {
-  const {setUser} = useUserContext();
-  const logout = () =>{
-    sessionStorage.clear();
-    setUser(null);
-  };
+  const [Event, setEvent] = useState([]);
+  useEffect(() => {
+    let isCancelled = false;
+    userService
+      .GetEvents()
+      .then((res) => {
+        if (res.error) {
+          alert(res.message);
+        } else {
+          setEvent(res.data.event);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      return isCancelled = true;
+      
+  }, [Event]);
   return (
-    <div className="container-fluid">
-      <div className="row flex-nowrap">
-        <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-          <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-            <a className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-              <span className="fs-5 d-none d-sm-inline">MENU</span>
-            </a>
-            <ul
-              className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-              id="menu"
-            >
-              <li className="nav-item">
-                <a className="nav-link align-middle px-0">
-                  <i className="far fa-user"></i>
-                  <span className="ms-1 d-none d-sm-inline">Perfil</span>
-                </a> 
-              </li>
-              <li>
-                <a
-                  data-bs-toggle="collapse"
-                  className="nav-link px-0 align-middle"
-                >
-                  <i className="fas fa-calendar-week"></i>
-                  <span className="ms-1 d-none d-sm-inline">Eventos</span>{" "}
-                </a>
-              </li>
-              <li>
-                <a
-                  className="nav-link px-0 align-middle"
-                  data-bs-toggle="collapse"
-                >
-                  <i className="fas fa-tasks"></i>
-                  <span className="ms-1 d-none d-sm-inline">Tareas</span>{" "}
-                </a>
-              </li>
-              <li>
-                <a className="nav-link px-0 align-middle custom-items" onClick={logout} style={{cursor: "pointer"}}>
-                  <i className="fas fa-power-off"></i>
-                  <span className="ms-1 d-none d-sm-inline">Cerrar Sesión</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="col py-3" style={{overflowY:"hidden"}}>
-          <div style={{display:"flex", flexWrap:"wrap"}}>
-            <div className="card" style={{margin: "20px", maxWidth:"350PX"}}>
-              <img
-                src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a className="btn btn-primary">
-                  Ver mas
-                </a>
-              </div>
+    <div>
+      {Event.map((evento) => (
+        <div key={evento.id} style={{ display: "flex", flexWrap: "wrap" }}>
+          <div className="card" style={{ margin: "20px", maxWidth: "350PX" }}>
+            <img
+              src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
+              className="card-img-top"
+              alt="..."
+            />
+            <div className="card-body">
+              <h5 className="card-title">{evento.tittle}</h5>
+              <p className="card-text">{evento.description}</p>
+              <a className="btn btn-primary">Ver mas</a>
             </div>
           </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 };

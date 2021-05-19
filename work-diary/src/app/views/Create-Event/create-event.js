@@ -1,16 +1,20 @@
+
+import { createEvent } from "@testing-library/dom";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link ,useHistory } from "react-router-dom";
+import { userService } from "../../api/user/user.service";
 //import "./login.css"
 
-const CreateEvent = () => {
+const CreateEvent = ({setModal}) => {
+  const history = useHistory();
   const [CreateEvent, setCreateEvent] = useState({
     tittle: "",
     description: "",
-    work: "",
+    typeWork:"",
     ubication: "",
     nameClient: "",
     emailClient: "",
-    date: "",
+    time: "",
     status: "",
   });
   const onChange = (e) => {
@@ -18,6 +22,20 @@ const CreateEvent = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
+    console.log(CreateEvent);
+    userService.CreateEvent(CreateEvent).then(
+      (res)=>{
+        if(res.error){
+          alert(res.message);
+        }else{
+          alert(res.message);
+          history.push("");
+          setModal(false);
+        }
+      }
+    ).catch((err)=>{
+      console.log(err);
+    })
   };
 
   return (
@@ -50,7 +68,7 @@ const CreateEvent = () => {
           <div className="col-md-12">
             <input
               type="text"
-              name="work"
+              name="typeWork"
               className="form-control form-control-line"
             />
           </div>
@@ -90,29 +108,25 @@ const CreateEvent = () => {
           <div className="col-md-12">
             <input
               type="date"
-              name="date"
+              name="time"
               placeholder="dd/mm/yy"
               className="form-control form-control-line"
             />
           </div>
         </div>
-        <div className="form-group">
-          <label className="col-md-12">Estado del trabajo</label>
-          <div className="col-md-12">
-            <input
-              type="text"
-              name="status"
-              className="form-control form-control-line"
-            />
-          </div>
+        <div className="form-group ">
+          <select className="form-select form-control form-control-line" name="status" >
+            <option defaultValue hidden>Estado del Trabajo</option>
+            <option value="Sin iniciar">Sin iniciar</option>
+            <option value="En proceso">En proceso</option>
+            <option value="Finalizado">Finalizado</option>
+          </select>
         </div>
         <div className="form-group">
-          <button className="btn btn-outline-success">Crear Evento</button>
+          <button className="btn btn-outline-success" type="submit">Crear Evento</button>
         </div>
         <div className="form-group">
-          <Link to="/create-task">
-            <button className="btn btn-outline-success">Añadir Tarea</button>
-          </Link>
+            <button className="btn btn-outline-success" onClick={()=>setModal(false)} type="button">Cancelar</button>
         </div>
       </form>
     </div>

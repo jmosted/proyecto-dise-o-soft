@@ -6,7 +6,7 @@ export const Event = sequelize.define('event',{
         type:Sequelize.INTEGER,
         primaryKey:true
     },
-    titlle:{
+    tittle:{
         type:Sequelize.STRING
     },
     description:{
@@ -16,7 +16,7 @@ export const Event = sequelize.define('event',{
         type:Sequelize.STRING
     },
     ubication:{
-        type:Sequelize.DOUBLE
+        type:Sequelize.STRING
     },
     nameClient:{
         type:Sequelize.STRING
@@ -28,7 +28,7 @@ export const Event = sequelize.define('event',{
         type:Sequelize.DATE
     },
     status:{
-        type:Sequelize.BOOLEAN
+        type:Sequelize.STRING
     }
 
 })

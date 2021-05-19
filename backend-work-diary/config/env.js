@@ -3,5 +3,5 @@ export const envConfig = {
     password: "manro456,.-",
     user: "postgres",
     tokenSecret: "jose-roman",
-    tokenLife: 900
+    tokenLife: 9000
 }

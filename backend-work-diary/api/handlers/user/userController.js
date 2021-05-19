@@ -47,6 +47,7 @@ export const createUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     const {name, lastName, dni, email, cellphone, direction} = req.body;
+    console.log(name,lastName,email,dni,cellphone,direction);
     try {
         const user = await User.update(
             {
@@ -63,12 +64,22 @@ export const updateUser = async (req, res) => {
                 },
             }
         );
-        res.status(200).json({
-            error: false,
-            message: "User update",
-            data: {user},
-            code: 200,
-        });
+        if (user === 0) {
+            res.status(202).json({
+                error: true,
+                message: "No se pudo actualizar el perfil del usuario",
+                data: null,
+                code: 202,
+            });
+        } else {
+            const user  = await getUserByEmail(email);
+            res.status(200).json({
+                error: false,
+                message: "User update",
+                data: {user},
+                code: 200,
+            });
+        }
     } catch (error) {
         res.status(202).json({
             error: true,
