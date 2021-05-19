@@ -2,7 +2,20 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { userService } from "../../api/user/user.service";
 import "./register.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Register = () => {
+  function Tek(){
+    const notify = ()=> toast("REGISTRO EXITOSO");
+    return (
+      <div>
+        <button onClick={notify}>
+        </button>
+        
+      </div>
+    );
+  }
   const [register, setRegister] = useState({
     name: "",
     lastName: "",
@@ -107,7 +120,11 @@ const Register = () => {
             placeholder="Dirección"
             className="input-100"
           />
-          <input type="submit" value="Registrar" className="btn-enviar" />
+          <input 
+            type="submit" 
+            value="Registrar" 
+            className="btn-enviar" 
+          />
           <p className="form-link">
             Ya tienes una cuenta?
             <Link to="/login">Ingresa aquí</Link>

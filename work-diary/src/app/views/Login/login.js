@@ -36,17 +36,22 @@ const Loginpage = () => {
 
   return (
     <form onChange={onChange} onSubmit={onSubmit}>
+      <div style={{textAlign:""}}>
+        <span>BIENVENIDO A WORK DIARY</span>
+      </div>
       <div className="group">
+        <label>Email</label>
         <input type="email" name="email" />
         <span className="highlight"></span>
         <span className="bar"></span>
-        <label>Email</label>
+       
       </div>
       <div className="group">
+      <label>Password</label>
         <input type="password" name="password" />
         <span className="highlight"></span>
         <span className="bar"></span>
-        <label>Password</label>
+        
       </div>
       <button type="submit" className="button buttonBlue">
         Iniciar Sesión
